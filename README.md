@@ -1,256 +1,117 @@
-Project Management AI Tool
+# Project Management AI Tool
 
-An AI-powered project management assistant designed to help Project Managers and Scrum Masters understand project status, identify risks, and make better-informed decisions.
+An AI-assisted project management application designed to help project managers understand project status, identify risks, and make informed decisions.
 
-🎯 Project Vision
+## Technology Stack
 
-The Project Management AI Tool transforms project information into actionable management insights.
+- **Frontend:** React, TypeScript, and Vite
+- **Backend:** Python and FastAPI
+- **Frontend quality:** ESLint and TypeScript
+- **Backend quality:** Ruff
+- **Future storage:** SQLite
+- **Future AI integration:** OpenAI API, accessed through the backend
 
-The core concept is:
+## Project Structure
 
-Input → Analyze → AI Insights → Action
-
-The system is intended to augment project-management decision-making by helping users quickly understand:
-
-What is happening in the project
-
-What requires attention
-
-What could become a problem
-
-Why it may be a problem
-
-What actions could be considered
-
-The tool is not intended to replace the Project Manager. AI-generated insights are decision-support information and should be evaluated by the user.
-
-🚀 MVP
-
-The initial MVP focuses on validating the core product proposition without attempting to become a complete project-management platform.
-
-The MVP will provide:
-
-Project and task information
-
-Task status and priority
-
-Due dates and ownership
-
-Basic dependencies
-
-Project health overview
-
-Identification of overdue items
-
-Identification of important risks
-
-Identification of potential schedule problems
-
-AI-generated project summary
-
-AI-generated risk insights
-
-AI-generated recommendations
-
-The MVP should answer three fundamental questions:
-
-What is happening?
-What requires my attention?
-What should I consider doing about it?
-
-🧭 Project Roadmap
-
-The product is planned to evolve incrementally:
-
-Phase 1 — MVP
-
-Project Data → Dashboard → Analysis → AI Insights
-
-Phase 2 — Usability & Real Data
-
-Improved user experience
-
-Persistent project data
-
-CSV import
-
-Excel import
-
-Enhanced analysis
-
-Phase 3 — Integrations
-
-Potential integrations with:
-
-Jira
-
-Microsoft Planner
-
-Trello
-
-Other project-management platforms
-
-Phase 4 — Automation
-
-Potential capabilities:
-
-Scheduled project analysis
-
-Risk monitoring
-
-Notifications
-
-Management reports
-
-Proactive alerts
-
-Phase 5 — Project Intelligence Platform
-
-Long-term capabilities may include:
-
-Continuous project monitoring
-
-Predictive insights
-
-Advanced recommendations
-
-Broader project-management intelligence
-
-🏗️ Project Structure
-
-The project will evolve incrementally. The expected repository structure is:
-
+```text
 project-management-ai-tool/
-│
-├── README.md
-│
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   └── main.py
+│   └── pyproject.toml
+├── data/
 ├── docs/
-│   └── project-definition.md
-│
-├── src/
-│
-├── tests/
-│
-└── ...
+├── frontend/
+├── .gitignore
+└── README.md
+```
 
-The exact structure may evolve as the technical architecture becomes clearer.
+The backend virtual environment (`backend/.venv/`) and frontend dependencies (`frontend/node_modules/`) are local development artifacts and should not be committed.
 
-📋 Project Management
+## Prerequisites
 
-Development is managed using GitHub Projects and GitHub Issues.
+Install the following tools:
 
-The backlog is organized around:
+- Git
+- Node.js and npm
+- Python 3.14 or another Python version compatible with the project's dependencies
+- Visual Studio Code (recommended)
 
-Epic
-  ↓
-User Story
-  ↓
-Task
+## Getting Started
 
-The development workflow is:
+### 1. Frontend
 
-Backlog → Ready → In Progress → Review → Done
+Open a terminal at the repository root:
 
-The Product Backlog and project definition are maintained separately from the source code so that product decisions remain documented and traceable.
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-🧪 Quality Principles
+Open the local URL displayed in the terminal, usually `http://localhost:5173/`.
 
-The project follows these principles:
+To validate the frontend:
 
-Value before complexity
+```powershell
+npm run lint
+npm run build
+```
 
-AI assists; humans decide
+### 2. Backend
 
-Explainability matters
+Open a second terminal at the repository root:
 
-Start small
+```powershell
+cd backend
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install "fastapi[standard]" ruff
+```
 
-Use real project data progressively
+Start the API:
 
-Integrate only after validating the core product
+```powershell
+fastapi dev app/main.py
+```
 
-Treat testing and security as continuous activities
+The API will usually be available at `http://127.0.0.1:8000`.
 
-Design for evolution without over-engineering
+### 3. Verify the API
 
-👨‍💻 Development Approach
+Health endpoint:
 
-The project is being developed incrementally with an emphasis on:
+`http://127.0.0.1:8000/api/health`
 
-Simple and maintainable solutions
+Expected response:
 
-Software-development best practices
+```json
+{"status": "ok"}
+```
 
-Clear documentation
+Interactive API documentation:
 
-Version control
+`http://127.0.0.1:8000/docs`
 
-Testing
+### 4. Backend quality checks
 
-Security
+Run these commands from the `backend` directory with the virtual environment activated:
 
-Incremental delivery
+```powershell
+ruff check .
+ruff format --check .
+```
 
-Learning through implementation and validation
+## Current Scope
 
-The technical architecture and technology choices will evolve according to the needs of the product rather than being unnecessarily defined upfront.
+The initial application skeleton provides a working frontend development environment and a minimal FastAPI backend with a health endpoint.
 
-📚 Documentation
+Database persistence, project management features, AI-powered analysis, automated tests, and deployment will be introduced incrementally in subsequent development tasks.
 
-The main project definition is maintained in:
+## Security
 
-docs/project-definition.md
-
-This document defines:
-
-Project purpose
-
-Target users
-
-MVP scope
-
-Product capabilities
-
-AI role
-
-Data strategy
-
-Integration strategy
-
-Automation
-
-Testing
-
-Security
-
-Deployment
-
-Documentation principles
-
-Additional documentation will be added as the project evolves.
-
-📌 Current Status
-
-Status: Project Definition / Backlog Preparation
-
-The project is currently in the planning and foundation stage.
-
-Current objectives
-
-Define project vision
-
-Define MVP scope
-
-Define initial Product Backlog
-
-Create GitHub Project
-
-Create initial Epics and User Stories
-
-Establish development environment
-
-Begin MVP implementation
-
-📄 License
-
-License to be defined.
+- Never commit API keys, passwords, or other secrets.
+- Keep local environment files out of version control.
+- Store future OpenAI API credentials on the backend, never in frontend code.
