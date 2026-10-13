@@ -38,3 +38,59 @@ This document defines the initial attributes for a task so project data can be r
   "due_date": "2026-10-20",
   "dependencies": []
 }
+
+# Task Statuses
+
+This document defines the supported task statuses and the lifecycle used to represent task progress consistently.
+
+## Supported statuses
+
+| Status | Meaning |
+|---|---|
+| `backlog` | The task is recorded but has not yet been prepared for work. |
+| `ready` | The task is sufficiently defined and can be started when capacity is available. |
+| `in_progress` | Work on the task has started and is actively underway. |
+| `blocked` | Work cannot continue because of a dependency, decision, access issue, or other impediment. The blocker should be documented. |
+| `in_review` | The work is complete enough for review or validation, but has not yet been accepted as finished. |
+| `done` | The task meets its completion criteria and no further work is expected. |
+| `cancelled` | The task will not be completed because it is no longer needed or has been intentionally stopped. |
+
+## Lifecycle
+
+Typical flow:
+
+```text
+backlog → ready → in_progress → in_review → done
+                         ↕
+                      blocked
+```
+
+- A task may move from `backlog` to `ready` once its scope and acceptance criteria are clear.
+- A task moves to `in_progress` when work begins.
+- A task may move to `blocked` whenever an impediment prevents progress. Record the reason for the block.
+- When the impediment is resolved, return the task to the status it had before becoming blocked, usually `in_progress`.
+- A task may move from `in_progress` to `in_review` when it is ready for review or validation.
+- If review finds more work is needed, return the task to `in_progress`.
+- Move a task to `done` only when its completion criteria are met.
+- A task may move to `cancelled` from any status if the work is no longer required.
+- Reopen a `done` or `cancelled` task only through an explicit decision; return it to `ready` or `backlog` as appropriate.
+
+## Validation rules
+
+- `status` is required for every task.
+- Store status using the exact lowercase values listed above.
+- Reject values that are not in the supported set; do not silently substitute a default.
+- A task marked `blocked` must have a recorded blocker reason.
+- A task marked `done` must satisfy its completion criteria.
+- `done` and `cancelled` are terminal statuses unless the task is explicitly reopened.
+- Task status represents work progress and is independent of a GitHub issue’s open or closed state. If the system imports issues, it must use an explicit mapping rather than treating those states as interchangeable.
+
+## Example
+
+```json
+{
+  "task_id": "task-123",
+  "task_name": "Define task attributes",
+  "status": "in_progress"
+}
+```
