@@ -2,6 +2,15 @@
 
 Use these conventions for new code and follow them when editing existing code. Prefer descriptive names, consistent with the language and toolchain, over abbreviations or clever wordplay. Use `id`, `API`, and other widely understood technical terms where they improve clarity.
 
+## Readability, maintainability, and typing
+
+- Keep functions and components focused on one responsibility. Prefer straightforward code over clever shortcuts, premature abstractions, or duplicated configuration.
+- Use descriptive names and small, cohesive modules. Add comments to explain non-obvious decisions, not to restate what the code already says.
+- Give data crossing module or API boundaries an explicit type. Prefer narrow, accurate types; avoid TypeScript `any` and use `unknown` when a value must be checked before use.
+- Add Python type annotations to functions and use Pydantic schemas to validate API data. Keep validation and business rules in the appropriate backend modules.
+- Handle expected errors clearly and avoid silently ignoring failures.
+- Follow the existing ESLint and Ruff rules. Use Ruff's formatter for Python rather than introducing a second formatting tool.
+
 ## Files and directories
 
 - Use lowercase directory names. Use one word where possible and kebab-case for multiword frontend or documentation directories, for example `api/` and `project-dashboard/`. Python package directories use snake_case.
@@ -48,3 +57,31 @@ Use these conventions for new code and follow them when editing existing code. P
 | Python module and function | snake_case | `health.py`, `health_check` |
 | Pydantic schema | PascalCase + `Schema` | `TaskSchema` |
 | API collection route | lowercase plural resource | `GET /api/projects` |
+
+## Development and validation workflow
+
+Run the checks from the relevant project directory in PowerShell. Run them before committing changes that touch that part of the application.
+
+### Frontend
+
+From `frontend/`:
+
+```powershell
+npm run lint
+npm run build
+```
+
+`npm run lint` runs ESLint. `npm run build` runs the TypeScript project checks before creating the Vite production build.
+
+### Backend
+
+From `backend/`, with the project virtual environment active (or invoke its executables directly):
+
+```powershell
+ruff check .
+ruff format --check .
+```
+
+`ruff check .` checks the configured lint rules and import order. `ruff format --check .` verifies formatting without changing files. To apply formatting after editing Python files, run `ruff format .`, then rerun both checks.
+
+Do not add linters, formatters, or automation without a project need and agreement. When a check fails, fix the relevant issue and rerun the check before committing.
