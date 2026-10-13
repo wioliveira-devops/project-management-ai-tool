@@ -1,0 +1,12 @@
+{
+  "id": "sample-customer-portal-modernization",
+  "name": "Customer Portal Modernization",
+  "description": "Redesign the customer self-service portal so customers can manage their accounts, review invoices, and find support resources in one accessible, mobile-friendly experience.",
+  "owner": {
+    "name": "Maya Chen",
+    "role": "Product Manager"
+  },
+  "start_date": "2026-09-01",
+  "target_end_date": "2026-12-18",
+  "status": "active"
+}
