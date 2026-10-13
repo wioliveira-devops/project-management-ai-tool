@@ -188,7 +188,8 @@ project-management-ai-tool/
 ├── docs/
 │   ├── project-definition.md
 │   ├── architecture.md
-│   └── data-model.md
+│   ├── data-model.md
+│   └── coding-standards.md
 ├── frontend/
 │   ├── package.json
 │   ├── src/
