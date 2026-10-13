@@ -1,0 +1,50 @@
+[
+  {
+    "id": "task-map-account-billing-journeys",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Map current account and billing journeys",
+    "description": "Document how customers currently view account details, update profile information, and find invoices. Identify confusing steps and common support handoffs."
+  },
+  {
+    "id": "task-interview-customers-and-support",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Interview customers and support agents",
+    "description": "Gather feedback from a representative group of customers and support agents about the most common portal tasks, accessibility needs, and recurring points of friction."
+  },
+  {
+    "id": "task-define-portal-navigation",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Define portal navigation and content structure",
+    "description": "Create a clear information architecture for account settings, invoices, support resources, and notifications so customers can find key actions quickly."
+  },
+  {
+    "id": "task-design-account-overview",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Design the accessible account overview",
+    "description": "Prepare responsive designs for the account overview, including profile details, recent billing activity, and clear links to the most-used customer actions."
+  },
+  {
+    "id": "task-build-profile-settings",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Build profile and notification settings",
+    "description": "Implement the screens that let customers review their contact details and manage service notification preferences, with clear validation and confirmation states."
+  },
+  {
+    "id": "task-connect-invoice-history",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Connect the portal to invoice history",
+    "description": "Integrate the invoice history view with the billing service so customers can review recent invoices and open the details for a selected billing period."
+  },
+  {
+    "id": "task-create-support-resource-center",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Create a searchable support resource center",
+    "description": "Organize frequently used help articles and service guidance into a searchable section that works well on desktop and mobile."
+  },
+  {
+    "id": "task-validate-mobile-accessibility",
+    "project_id": "sample-customer-portal-modernization",
+    "title": "Validate mobile usability and accessibility",
+    "description": "Review the key customer journeys on common screen sizes and check keyboard navigation, readable contrast, and accessible labels before the portal release."
+  }
+]
