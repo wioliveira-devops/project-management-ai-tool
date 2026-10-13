@@ -210,6 +210,22 @@ project-management-ai-tool/
 
 The actual structure may evolve as implementation proceeds. Keep frontend and backend responsibilities separate, and do not create empty modules or abstractions without a concrete need.
 
+For the initial health-check example, keep the source boundaries small:
+
+```text
+frontend/src/
+├── api/health.ts             # HTTP request and response handling
+├── components/ApiStatus.tsx  # Presentational status output
+├── features/health/useApiHealth.ts # Request state and application behavior
+└── App.tsx                   # Page composition
+
+backend/app/
+├── api/health.py             # HTTP route and response
+└── main.py                   # FastAPI setup and route registration
+```
+
+`App.tsx` composes the page, `useApiHealth` coordinates request state, and `api/health.ts` handles HTTP. `ApiStatus` renders its props and does not make network requests. Backend routes handle HTTP concerns; place business rules in a service module when those rules are introduced. The health endpoint currently has no domain logic, so it does not need a service wrapper.
+
 SQLite database files, virtual environments, dependency directories, local secrets, and generated build artifacts must not be committed.
 
 ## 5. Initial GitHub Issues
