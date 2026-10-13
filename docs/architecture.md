@@ -102,15 +102,7 @@ Responsible for:
 
 Responsible for storing and retrieving projects, tasks, and related information.
 
-The initial data model should support:
-- Projects.
-- Tasks.
-- Status and priority.
-- Start dates and due dates.
-- Task owners.
-- Milestones and dependencies, when needed.
-
-Use a consistent date format and explicit status and priority values.
+The initial Project and Task contracts, including field types, status and priority values, and date rules, are documented in `docs/data-model.md`. Keep the corresponding TypeScript types in `frontend/src/types/` and Pydantic validation schemas in `backend/app/schemas/`. Add other entities, such as milestones and dependencies, only when a concrete requirement needs them.
 
 **Analysis services**
 
@@ -195,7 +187,8 @@ project-management-ai-tool/
 ├── .env.example
 ├── docs/
 │   ├── project-definition.md
-│   └── architecture.md
+│   ├── architecture.md
+│   └── data-model.md
 ├── frontend/
 │   ├── package.json
 │   ├── src/
