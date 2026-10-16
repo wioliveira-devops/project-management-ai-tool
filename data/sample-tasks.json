@@ -4,7 +4,9 @@
     "project_id": "sample-customer-portal-modernization",
     "title": "Map current account and billing journeys",
     "description": "Document how customers currently view account details, update profile information, and find invoices. Identify confusing steps and common support handoffs.",
-    "priority": "medium"
+    "priority": "medium",
+    "due_date": "2026-10-10",
+    "status": "in_progress"
   },
   {
     "id": "task-interview-customers-and-support",
