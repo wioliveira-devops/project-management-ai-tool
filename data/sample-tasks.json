@@ -14,6 +14,7 @@
     "title": "Interview customers and support agents",
     "description": "Gather feedback from a representative group of customers and support agents about the most common portal tasks, accessibility needs, and recurring points of friction.",
     "priority": "high",
+    "due_date": "2026-09-18",
     "status": "completed"
   },
   {
@@ -22,7 +23,9 @@
     "title": "Define portal navigation and content structure",
     "description": "Create a clear information architecture for account settings, invoices, support resources, and notifications so customers can find key actions quickly.",
     "priority": "high",
-    "status": "completed"
+    "due_date": "2026-09-30",
+    "status": "completed",
+    "depends_on": ["task-interview-customers-and-support"]
   },
   {
     "id": "task-design-account-overview",
@@ -30,8 +33,9 @@
     "title": "Design the accessible account overview",
     "description": "Prepare responsive designs for the account overview, including profile details, recent billing activity, and clear links to the most-used customer actions.",
     "priority": "high",
-    "depends_on": ["task-define-portal-navigation"],
-    "status": "in_progress"
+    "due_date": "2026-10-30",
+    "status": "in_progress",
+    "depends_on": ["task-define-portal-navigation"]
   },
   {
     "id": "task-build-profile-settings",
@@ -39,7 +43,9 @@
     "title": "Build profile and notification settings",
     "description": "Implement the screens that let customers review their contact details and manage service notification preferences, with clear validation and confirmation states.",
     "priority": "medium",
-    "status": "not_started"
+    "due_date": "2026-11-20",
+    "status": "not_started",
+    "depends_on": ["task-design-account-overview"]
   },
   {
     "id": "task-connect-invoice-history",
@@ -47,7 +53,9 @@
     "title": "Connect the portal to invoice history",
     "description": "Integrate the invoice history view with the billing service so customers can review recent invoices and open the details for a selected billing period.",
     "priority": "urgent",
-    "status": "not_started"
+    "due_date": "2026-11-27",
+    "status": "not_started",
+    "depends_on": ["task-design-account-overview"]
   },
   {
     "id": "task-create-support-resource-center",
@@ -55,7 +63,9 @@
     "title": "Create a searchable support resource center",
     "description": "Organize frequently used help articles and service guidance into a searchable section that works well on desktop and mobile.",
     "priority": "low",
-    "status": "not_started"
+    "due_date": "2026-11-20",
+    "status": "not_started",
+    "depends_on": ["task-define-portal-navigation"]
   },
   {
     "id": "task-validate-mobile-accessibility",
@@ -63,6 +73,12 @@
     "title": "Validate mobile usability and accessibility",
     "description": "Review the key customer journeys on common screen sizes and check keyboard navigation, readable contrast, and accessible labels before the portal release.",
     "priority": "high",
-    "status": "not_started"
+    "due_date": "2026-12-10",
+    "status": "not_started",
+    "depends_on": [
+      "task-build-profile-settings",
+      "task-connect-invoice-history",
+      "task-create-support-resource-center"
+    ]
   }
 ]
