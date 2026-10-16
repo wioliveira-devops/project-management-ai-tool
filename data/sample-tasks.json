@@ -27,7 +27,8 @@
     "project_id": "sample-customer-portal-modernization",
     "title": "Design the accessible account overview",
     "description": "Prepare responsive designs for the account overview, including profile details, recent billing activity, and clear links to the most-used customer actions.",
-    "priority": "high"
+    "priority": "high",
+    "depends_on": ["task-define-portal-navigation"]
   },
   {
     "id": "task-build-profile-settings",
