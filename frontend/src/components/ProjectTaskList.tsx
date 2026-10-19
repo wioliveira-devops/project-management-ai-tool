@@ -97,6 +97,16 @@ export function ProjectTaskList({
                     <span>{formatDueDate(task.due_date)}</span>
                   </p>
                 </div>
+                {task.dependencies.length > 0 && (
+                  <div className="task-dependencies">
+                    <p className="task-dependencies-label">Depends on</p>
+                    <ul>
+                      {task.dependencies.map((dependency) => (
+                        <li key={dependency.id}>{dependency.title}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </li>
           ))}

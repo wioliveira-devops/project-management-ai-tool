@@ -1,3 +1,5 @@
+"""Create the FastAPI application and connect its HTTP routes."""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,6 +12,8 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# The browser frontend runs on a separate local address during development.
+# CORS lets it make read-only (GET) requests to this backend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -17,6 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Routers group related endpoints; the shared prefix makes their URLs start
+# with /api (for example, /api/health).
 app.include_router(health_router, prefix="/api")
 app.include_router(projects_router, prefix="/api")
 app.include_router(tasks_router, prefix="/api")
