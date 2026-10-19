@@ -21,25 +21,27 @@ function App() {
       <section className="page-content" id="overview" aria-labelledby="page-title">
         <div className="page-heading">
           <div>
-            <p className="eyebrow">Project management</p>
-            <h1 id="page-title">Project overview</h1>
-            <p className="intro">Review the key details for your project.</p>
+            <p className="eyebrow">Project workspace</p>
+            <h1 id="page-title">Project dashboard</h1>
+            <p className="intro">A concise view of your project and its work.</p>
           </div>
         </div>
-        <ProjectOverview
-          project={project}
-          state={state}
-          errorMessage={errorMessage}
-          onRetry={() => void loadProject()}
-        />
-        {project && (
-          <ProjectTaskList
-            tasks={taskList.tasks}
-            state={taskList.state}
-            errorMessage={taskList.errorMessage}
-            onRetry={() => void taskList.loadTasks()}
+        <div className="dashboard-layout">
+          <ProjectOverview
+            project={project}
+            state={state}
+            errorMessage={errorMessage}
+            onRetry={() => void loadProject()}
           />
-        )}
+          {project && (
+            <ProjectTaskList
+              tasks={taskList.tasks}
+              state={taskList.state}
+              errorMessage={taskList.errorMessage}
+              onRetry={() => void taskList.loadTasks()}
+            />
+          )}
+        </div>
       </section>
     </main>
   )

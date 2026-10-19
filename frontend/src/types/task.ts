@@ -2,6 +2,11 @@ export type TaskStatus = 'not_started' | 'in_progress' | 'blocked' | 'completed'
 
 export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent'
 
+export interface TaskDependency {
+  id: string
+  title: string
+}
+
 export interface ProjectTaskSummary {
   id: string
   project_id: string
@@ -11,6 +16,7 @@ export interface ProjectTaskSummary {
   priority: TaskPriority | null
   owner: string | null
   due_date: string | null
+  dependencies: TaskDependency[]
 }
 
 export interface Task {

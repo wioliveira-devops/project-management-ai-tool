@@ -49,6 +49,13 @@
   margin-bottom: 2rem;
 }
 
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.82fr) minmax(0, 1.18fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
 .eyebrow,
 .card-label {
   margin: 0 0 0.55rem;
@@ -83,7 +90,7 @@
 }
 
 .task-list-card {
-  margin-top: 1.25rem;
+  min-width: 0;
   padding: clamp(1.35rem, 4vw, 2.25rem);
   background: #fff;
   border: 1px solid #e1e7ef;
@@ -253,6 +260,36 @@
   font-weight: 650;
 }
 
+.task-dependencies {
+  margin-top: 0.7rem;
+}
+
+.task-list-item .task-dependencies-label {
+  margin: 0 0 0.35rem;
+  color: #69788d;
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.task-dependencies ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-dependencies li {
+  padding: 0.3rem 0.55rem;
+  color: #4c5d75;
+  background: #f3f5f9;
+  border: 1px solid #e8edf3;
+  border-radius: 0.4rem;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
 .task-list-message {
   margin: 1.1rem 0 0;
   color: #607086;
@@ -369,6 +406,10 @@
 }
 
 .error-card button:hover { background: #294daa; }
+
+@media (max-width: 760px) {
+  .dashboard-layout { grid-template-columns: minmax(0, 1fr); }
+}
 
 @media (max-width: 640px) {
   .project-card-heading { flex-direction: column; }
