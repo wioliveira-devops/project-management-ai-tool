@@ -4,7 +4,22 @@ from typing import Literal, Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 TaskStatus = Literal["not_started", "in_progress", "blocked", "completed"]
-TaskPriority = Literal["low", "medium", "high"]
+TaskPriority = Literal["low", "medium", "high", "urgent"]
+
+
+class TaskSummarySchema(BaseModel):
+    """Task fields displayed in the project task list."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    id: str = Field(min_length=1)
+    project_id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    description: str = ""
+    status: TaskStatus
+    priority: TaskPriority | None = None
+    owner: str | None = None
+    due_date: date | None = None
 
 
 class TaskSchema(BaseModel):
