@@ -1,4 +1,5 @@
 import type { ProjectTaskSummary, TaskPriority, TaskStatus } from '../types/task'
+import { TaskStatusSummary } from './TaskStatusSummary'
 
 type ProjectTaskListProps = {
   tasks: ProjectTaskSummary[]
@@ -49,6 +50,10 @@ export function ProjectTaskList({
           </span>
         )}
       </div>
+
+      {state === 'ready' && tasks.length > 0 && (
+        <TaskStatusSummary tasks={tasks} />
+      )}
 
       {state === 'loading' && (
         <p className="task-list-message" role="status">
