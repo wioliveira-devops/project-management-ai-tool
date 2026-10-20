@@ -9,9 +9,10 @@ function getToday(): string {
   return `${year}-${month}-${day}`
 }
 
-export function getOverdueTasks(tasks: ProjectTaskSummary[]): ProjectTaskSummary[] {
-  const today = getToday()
-
+export function getOverdueTasks(
+  tasks: readonly ProjectTaskSummary[],
+  today = getToday(),
+): ProjectTaskSummary[] {
   return tasks
     .filter(
       (task) =>

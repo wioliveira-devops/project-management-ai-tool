@@ -115,6 +115,7 @@
 .overdue-card { border: 1px solid #f0d9d7; }
 .priority-card { border: 1px solid #f2e4c8; }
 .critical-card { border: 1px solid #edd8cf; }
+.deadline-card { border: 1px solid #d9e5f2; }
 .risk-card { border: 1px solid #e6dfea; }
 .recommendation-card { border: 1px solid #dce8e5; }
 
@@ -129,6 +130,7 @@
 
 .priority-card .attention-heading { border-bottom-color: #f3ecdf; }
 .critical-card .attention-heading { border-bottom-color: #f0e4dc; }
+.deadline-card .attention-heading { border-bottom-color: #e4edf7; }
 .risk-card .attention-heading { border-bottom-color: #eee8f1; }
 .recommendation-card .attention-heading { border-bottom-color: #e6efec; }
 
@@ -141,6 +143,7 @@
 
 .priority-card .attention-heading h2 { color: #68451a; }
 .critical-card .attention-heading h2 { color: #713e2c; }
+.deadline-card .attention-heading h2 { color: #315a88; }
 .risk-card .attention-heading h2 { color: #493557; }
 .recommendation-card .attention-heading h2 { color: #285448; }
 
@@ -160,6 +163,7 @@
 }
 
 .critical-card .attention-count { color: #8d482e; background: #fff0e8; }
+.deadline-card .attention-count { color: #315a88; background: #edf5ff; }
 
 .risk-card .attention-count { color: #67477b; background: #f4eef8; }
 .recommendation-card .attention-count { color: #286351; background: #eaf5f1; }
@@ -377,7 +381,6 @@
 
 .critical-reason-overdue { color: #9d3037; background: #fff0f0; }
 .critical-reason-priority { color: #96500d; background: #fff4e5; }
-.critical-reason-deadline { color: #315a88; background: #edf5ff; }
 
 .critical-task-link {
   color: #315a88;
@@ -445,7 +448,7 @@
 
 .task-status-summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.65rem;
   margin-bottom: 0.35rem;
 }

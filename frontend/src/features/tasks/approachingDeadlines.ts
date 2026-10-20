@@ -19,7 +19,7 @@ function addCalendarDays(date: string, days: number): string {
 }
 
 export function getApproachingDeadlineTasks(
-  tasks: ProjectTaskSummary[],
+  tasks: readonly ProjectTaskSummary[],
   warningWindowDays = DEFAULT_DEADLINE_WARNING_WINDOW_DAYS,
   today = getToday(),
 ): ProjectTaskSummary[] {
