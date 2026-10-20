@@ -5,6 +5,73 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 TaskStatus = Literal["not_started", "in_progress", "blocked", "completed"]
 TaskPriority = Literal["low", "medium", "high", "urgent"]
+RiskSeverity = Literal["low", "medium", "high"]
+
+
+class OverdueTaskSignalSchema(BaseModel):
+    """A date-based risk signal and the dates that support it."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: Literal["overdue-task"]
+    severity: RiskSeverity
+    task_id: str = Field(min_length=1)
+    due_date: date
+    analysis_date: date
+
+
+class HighPriorityOverdueTaskSignalSchema(BaseModel):
+    """A high-priority overdue signal with supporting task values."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: Literal["high-priority-overdue-task"]
+    severity: RiskSeverity
+    task_id: str = Field(min_length=1)
+    priority: Literal["high", "urgent"]
+    due_date: date
+    analysis_date: date
+
+
+class ApproachingDeadlineSignalSchema(BaseModel):
+    """An unfinished task has a due date in the next seven calendar days."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: Literal["approaching-deadline"]
+    severity: RiskSeverity
+    task_id: str = Field(min_length=1)
+    due_date: date
+    analysis_date: date
+
+
+class IncompletePrerequisiteSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    task_id: str = Field(min_length=1)
+    status: TaskStatus
+
+
+class IncompleteDependencySignalSchema(BaseModel):
+    """A non-completed task has one or more unfinished prerequisites."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: Literal["incomplete-dependency"]
+    severity: RiskSeverity
+    task_id: str = Field(min_length=1)
+    prerequisites: list[IncompletePrerequisiteSchema] = Field(min_length=1)
+
+
+class UnresolvedDependencySignalSchema(BaseModel):
+    """A task references prerequisite IDs absent from its project data."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: Literal["unresolved-dependency"]
+    severity: RiskSeverity
+    task_id: str = Field(min_length=1)
+    dependency_ids: list[str] = Field(min_length=1)
 
 
 class TaskSummarySchema(BaseModel):
@@ -20,6 +87,13 @@ class TaskSummarySchema(BaseModel):
     priority: TaskPriority | None = None
     owner: str | None = None
     due_date: date | None = None
+    risk_signals: list[
+        OverdueTaskSignalSchema
+        | HighPriorityOverdueTaskSignalSchema
+        | ApproachingDeadlineSignalSchema
+        | IncompleteDependencySignalSchema
+        | UnresolvedDependencySignalSchema
+    ] = Field(default_factory=list)
 
 
 class TaskSchema(BaseModel):

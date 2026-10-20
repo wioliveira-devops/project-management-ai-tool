@@ -113,6 +113,8 @@ Use deterministic business rules to identify:
 - Blocked tasks and relevant dependency problems.
 - Risks and schedule deviations supported by available data.
 
+The initial task-level risk signals and their input assumptions are defined in `docs/data-model/initial-risk-rules.md`. Keep each signal traceable to the task data that triggered it; assign severity separately from detection.
+
 Rules should be independently testable and should not require an AI API call.
 
 **AI service**

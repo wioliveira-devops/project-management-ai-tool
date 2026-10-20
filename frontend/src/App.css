@@ -193,6 +193,32 @@
   background: #e8f6ee;
 }
 
+.task-risk {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.task-risk.severity-low {
+  color: #2855a6;
+  background: #eaf1ff;
+}
+
+.task-risk.severity-medium {
+  color: #8a5a08;
+  background: #fff4d6;
+}
+
+.task-risk.severity-high {
+  color: #a32f35;
+  background: #fff0f0;
+}
+
 .task-priority {
   display: inline-flex;
   flex: 0 0 auto;

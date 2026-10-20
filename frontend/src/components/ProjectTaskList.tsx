@@ -1,4 +1,4 @@
-import type { ProjectTaskSummary, TaskPriority, TaskStatus } from '../types/task'
+import type { ProjectTaskSummary, TaskPriority, TaskRiskSignal, TaskStatus } from '../types/task'
 
 type ProjectTaskListProps = {
   tasks: ProjectTaskSummary[]
@@ -28,6 +28,21 @@ function formatDueDate(value: string | null): string {
     dateStyle: 'medium',
     timeZone: 'UTC',
   }).format(new Date(`${value}T00:00:00Z`))
+}
+
+function riskSignalLabel(signal: TaskRiskSignal): string {
+  switch (signal.rule_id) {
+    case 'overdue-task':
+      return 'Overdue'
+    case 'high-priority-overdue-task':
+      return 'High-priority overdue'
+    case 'approaching-deadline':
+      return 'Due soon'
+    case 'incomplete-dependency':
+      return 'Incomplete prerequisite'
+    case 'unresolved-dependency':
+      return 'Unresolved prerequisite'
+  }
 }
 
 export function ProjectTaskList({
@@ -80,6 +95,14 @@ export function ProjectTaskList({
                   <span className={`task-status status-${task.status}`}>
                     {statusLabels[task.status]}
                   </span>
+                  {task.risk_signals.map((signal, index) => (
+                    <span
+                      className={`task-risk severity-${signal.severity}`}
+                      key={`${signal.rule_id}-${index}`}
+                    >
+                      {riskSignalLabel(signal)} · {signal.severity} severity
+                    </span>
+                  ))}
                   <span
                     className={`task-priority priority-${task.priority ?? 'unset'}`}
                   >
