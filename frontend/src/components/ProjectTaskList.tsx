@@ -1,4 +1,5 @@
 import type { ProjectTaskSummary, TaskPriority, TaskStatus } from '../types/task'
+import { getTotalTaskCount } from '../features/tasks/totalTasks'
 import { TaskStatusSummary } from './TaskStatusSummary'
 
 type ProjectTaskListProps = {
@@ -44,7 +45,7 @@ export function ProjectTaskList({
   errorMessage,
   onRetry,
 }: ProjectTaskListProps) {
-  const totalTaskCount = tasks.length
+  const totalTaskCount = getTotalTaskCount(tasks)
   const tasksByStatus = taskStatusOrder.map((status) => ({
     status,
     tasks: tasks.filter((task) => task.status === status),

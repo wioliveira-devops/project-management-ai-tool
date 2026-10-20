@@ -1,4 +1,7 @@
 import type { ProjectTaskSummary, TaskStatus } from '../types/task'
+import { getCompletedTaskCount } from '../features/tasks/completedTasks'
+import { getPendingTaskCount } from '../features/tasks/pendingTasks'
+import { getTotalTaskCount } from '../features/tasks/totalTasks'
 
 type TaskStatusSummaryProps = {
   tasks: ProjectTaskSummary[]
@@ -16,10 +19,13 @@ export function TaskStatusSummary({ tasks }: TaskStatusSummaryProps) {
     not_started: 0,
     in_progress: 0,
     blocked: 0,
-    completed: 0,
+    completed: getCompletedTaskCount(tasks),
   }
-  tasks.forEach((task) => { counts[task.status] += 1 })
-  const totalTasks = tasks.length
+  tasks.forEach((task) => {
+    if (task.status !== 'completed') counts[task.status] += 1
+  })
+  const totalTasks = getTotalTaskCount(tasks)
+  const pendingTasks = getPendingTaskCount(tasks)
   const distributionDescription = statuses
     .map(({ value, label }) => `${label}: ${counts[value]}`)
     .join(', ')
@@ -28,6 +34,10 @@ export function TaskStatusSummary({ tasks }: TaskStatusSummaryProps) {
     <section className="task-status-summary" aria-labelledby="task-status-summary-title">
       <h3 id="task-status-summary-title">Task status summary</h3>
       <div className="task-status-summary-grid">
+        <div className="task-summary-item">
+          <span className="task-summary-count">{pendingTasks}</span>
+          <span className="task-summary-label">Pending</span>
+        </div>
         {statuses.map(({ value, label }) => (
           <div className={`task-summary-item task-summary-${value}`} key={value}>
             <span className="task-summary-count">{counts[value]}</span>

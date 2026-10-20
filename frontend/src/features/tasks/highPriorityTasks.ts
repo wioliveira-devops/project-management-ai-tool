@@ -2,7 +2,7 @@ import type { ProjectTaskSummary } from '../../types/task'
 
 type HighPriorityTask = ProjectTaskSummary & { priority: 'urgent' | 'high' }
 
-export function getHighPriorityTasks(tasks: ProjectTaskSummary[]): HighPriorityTask[] {
+export function getHighPriorityTasks(tasks: readonly ProjectTaskSummary[]): HighPriorityTask[] {
   return tasks
     .filter(
       (task): task is HighPriorityTask =>

@@ -1,4 +1,3 @@
-import { getApproachingDeadlineTasks } from '../features/tasks/approachingDeadlines'
 import { getHighPriorityTasks } from '../features/tasks/highPriorityTasks'
 import { getOverdueTasks } from '../features/tasks/overdueTasks'
 import type { ProjectTaskSummary, TaskStatus } from '../types/task'
@@ -7,7 +6,7 @@ type CriticalItemsListProps = {
   tasks: ProjectTaskSummary[]
 }
 
-type CriticalReason = 'overdue' | 'priority' | 'deadline'
+type CriticalReason = 'overdue' | 'priority'
 
 type CriticalItem = {
   task: ProjectTaskSummary
@@ -24,7 +23,6 @@ const statusLabels: Record<TaskStatus, string> = {
 const reasonLabels: Record<CriticalReason, string> = {
   overdue: 'Overdue',
   priority: 'High priority',
-  deadline: 'Deadline approaching',
 }
 
 function formatDueDate(value: string | null): string {
@@ -53,9 +51,7 @@ function getCriticalItems(tasks: ProjectTaskSummary[]): CriticalItem[] {
 
   addReason(getOverdueTasks(tasks), 'overdue')
   addReason(getHighPriorityTasks(tasks), 'priority')
-  addReason(getApproachingDeadlineTasks(tasks), 'deadline')
-
-  const reasonOrder: CriticalReason[] = ['overdue', 'priority', 'deadline']
+  const reasonOrder: CriticalReason[] = ['overdue', 'priority']
 
   return [...itemsById.values()].sort((first, second) => {
     const firstReason = reasonOrder.findIndex((reason) => first.reasons.includes(reason))

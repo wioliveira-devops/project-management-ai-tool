@@ -3,6 +3,7 @@ import { CriticalItemsList } from './components/CriticalItemsList'
 import { ProjectRecommendationList } from './components/ProjectRecommendationList'
 import { ProjectRiskList } from './components/ProjectRiskList'
 import { ProjectTaskList } from './components/ProjectTaskList'
+import { UpcomingDeadlineList } from './components/UpcomingDeadlineList'
 import { getProjectHealth } from './features/projects/projectHealth'
 import { useProject } from './features/projects/useProject'
 import { useProjectTasks } from './features/tasks/useProjectTasks'
@@ -42,7 +43,10 @@ function App() {
           {project && (
             <div className="dashboard-work-column">
               {taskList.state === 'ready' && (
-                <CriticalItemsList tasks={taskList.tasks} />
+                <>
+                  <CriticalItemsList tasks={taskList.tasks} />
+                  <UpcomingDeadlineList tasks={taskList.tasks} />
+                </>
               )}
               {taskList.state === 'ready' && taskList.tasks.length > 0 && (
                 <>
