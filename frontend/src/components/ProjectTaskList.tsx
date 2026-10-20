@@ -97,7 +97,12 @@ export function ProjectTaskList({
               </div>
               <ul className="task-list">
                 {groupedTasks.map((task) => (
-                  <li className="task-list-item" key={task.id}>
+                  <li
+                    className="task-list-item"
+                    id={`task-${encodeURIComponent(task.id)}`}
+                    key={task.id}
+                    tabIndex={-1}
+                  >
                     <span className="task-list-icon" aria-hidden="true">○</span>
                     <div className="task-list-content">
                       <div className="task-list-item-heading">

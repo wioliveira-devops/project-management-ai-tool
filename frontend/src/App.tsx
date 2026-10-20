@@ -1,6 +1,5 @@
 import { ProjectOverview } from './components/ProjectOverview'
-import { HighPriorityTaskList } from './components/HighPriorityTaskList'
-import { OverdueTaskList } from './components/OverdueTaskList'
+import { CriticalItemsList } from './components/CriticalItemsList'
 import { ProjectRecommendationList } from './components/ProjectRecommendationList'
 import { ProjectRiskList } from './components/ProjectRiskList'
 import { ProjectTaskList } from './components/ProjectTaskList'
@@ -42,10 +41,11 @@ function App() {
           />
           {project && (
             <div className="dashboard-work-column">
+              {taskList.state === 'ready' && (
+                <CriticalItemsList tasks={taskList.tasks} />
+              )}
               {taskList.state === 'ready' && taskList.tasks.length > 0 && (
                 <>
-                  <OverdueTaskList tasks={taskList.tasks} />
-                  <HighPriorityTaskList tasks={taskList.tasks} />
                   <ProjectRiskList tasks={taskList.tasks} />
                   <ProjectRecommendationList tasks={taskList.tasks} />
                 </>

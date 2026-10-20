@@ -114,6 +114,7 @@
 
 .overdue-card { border: 1px solid #f0d9d7; }
 .priority-card { border: 1px solid #f2e4c8; }
+.critical-card { border: 1px solid #edd8cf; }
 .risk-card { border: 1px solid #e6dfea; }
 .recommendation-card { border: 1px solid #dce8e5; }
 
@@ -127,6 +128,7 @@
 }
 
 .priority-card .attention-heading { border-bottom-color: #f3ecdf; }
+.critical-card .attention-heading { border-bottom-color: #f0e4dc; }
 .risk-card .attention-heading { border-bottom-color: #eee8f1; }
 .recommendation-card .attention-heading { border-bottom-color: #e6efec; }
 
@@ -138,6 +140,7 @@
 }
 
 .priority-card .attention-heading h2 { color: #68451a; }
+.critical-card .attention-heading h2 { color: #713e2c; }
 .risk-card .attention-heading h2 { color: #493557; }
 .recommendation-card .attention-heading h2 { color: #285448; }
 
@@ -155,6 +158,8 @@
   color: #96500d;
   background: #fff4e5;
 }
+
+.critical-card .attention-count { color: #8d482e; background: #fff0e8; }
 
 .risk-card .attention-count { color: #67477b; background: #f4eef8; }
 .recommendation-card .attention-count { color: #286351; background: #eaf5f1; }
@@ -340,6 +345,48 @@
   font-weight: 700;
   line-height: 1.45;
 }
+
+.critical-task-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.critical-task-heading h3 {
+  margin: 0;
+  color: #25354b;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.critical-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.critical-reason {
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.critical-reason-overdue { color: #9d3037; background: #fff0f0; }
+.critical-reason-priority { color: #96500d; background: #fff4e5; }
+.critical-reason-deadline { color: #315a88; background: #edf5ff; }
+
+.critical-task-link {
+  color: #315a88;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.critical-task-link:hover { color: #1e416b; }
 
 .attention-task-description {
   margin: 0.35rem 0 0;
