@@ -387,11 +387,20 @@
   font-weight: 650;
 }
 
-.task-status-summary {
+.task-status-summary { margin-top: 1.15rem; }
+
+.task-status-summary > h3 {
+  margin: 0 0 0.6rem;
+  color: #53647a;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.task-status-summary-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.65rem;
-  margin: 1.15rem 0 0.35rem;
+  margin-bottom: 0.35rem;
 }
 
 .task-summary-item {
@@ -417,6 +426,28 @@
   line-height: 1.35;
 }
 
+.task-summary-chart {
+  display: flex;
+  width: 100%;
+  height: 0.75rem;
+  margin-top: 0.8rem;
+  overflow: hidden;
+  background: #f0f3f8;
+  border-radius: 999px;
+}
+
+.task-summary-chart-segment { flex: 0 0 auto; }
+.task-summary-chart-completed { background: #3c9a68; }
+.task-summary-chart-in_progress { background: #4f75d6; }
+.task-summary-chart-not_started { background: #aab5c4; }
+.task-summary-chart-blocked { background: #d75c52; }
+
+.task-summary-empty {
+  margin: 0.8rem 0 0;
+  color: #65748a;
+  font-size: 0.8rem;
+}
+
 .task-summary-completed { background: #eff8f2; }
 .task-summary-in_progress { background: #f0f4ff; }
 .task-summary-blocked { background: #fff3f1; }
@@ -425,6 +456,24 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.task-status-group { margin-top: 1.2rem; }
+
+.task-status-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #e8edf3;
+}
+
+.task-status-group-heading h3 {
+  margin: 0;
+  color: #53647a;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .task-list-item {
@@ -450,7 +499,7 @@
   font-weight: 800;
 }
 
-.task-list-item h3 {
+.task-list-item h4 {
   margin: 0;
   color: #25354b;
   font-size: 0.95rem;
@@ -756,5 +805,5 @@
   .project-card-heading { flex-direction: column; }
   .project-facts { grid-template-columns: 1fr; gap: 1.15rem; }
   .task-list-item-heading { flex-direction: column; gap: 0.45rem; }
-  .task-status-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .task-status-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
