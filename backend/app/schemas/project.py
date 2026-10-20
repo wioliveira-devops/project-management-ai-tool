@@ -1,13 +1,16 @@
+"""Pydantic models that validate project data returned by the API."""
+
 from datetime import date
 from typing import Literal, Self
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 ProjectStatus = Literal["planned", "active", "on_hold", "completed"]
+# Literal limits a status to these named choices instead of accepting any text.
 
 
 class ProjectOwnerSchema(BaseModel):
-    """Public project owner details shown in the project overview."""
+    """Owner name and role shown in the project overview."""
 
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
@@ -16,7 +19,7 @@ class ProjectOwnerSchema(BaseModel):
 
 
 class ProjectSchema(BaseModel):
-    """Validated project data shared by API request and response contracts."""
+    """Project fields and rules used to validate an API response."""
 
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
@@ -30,6 +33,7 @@ class ProjectSchema(BaseModel):
 
     @model_validator(mode="after")
     def target_end_date_is_not_before_start_date(self) -> Self:
+        """Reject a project whose target finish date comes before its start."""
         if (
             self.start_date is not None
             and self.target_end_date is not None

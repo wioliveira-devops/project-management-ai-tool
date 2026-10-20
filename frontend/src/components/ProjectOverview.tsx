@@ -1,7 +1,9 @@
 import type { Project, ProjectStatus } from '../types/project'
+import type { ProjectHealth } from '../features/projects/projectHealth'
 
 type ProjectOverviewProps = {
   project: Project | null
+  health: ProjectHealth
   state: 'loading' | 'ready' | 'error'
   errorMessage: string
   onRetry: () => void
@@ -25,6 +27,7 @@ function formatDate(value: string | null): string {
 
 export function ProjectOverview({
   project,
+  health,
   state,
   errorMessage,
   onRetry,
@@ -50,12 +53,9 @@ export function ProjectOverview({
   }
 
   return (
-    <article className="project-card" aria-labelledby="project-name">
+    <article className="project-card" aria-label={`${project.name} project details`}>
       <div className="project-card-heading">
-        <div>
-          <p className="card-label">Project details</p>
-          <h2 id="project-name">{project.name}</h2>
-        </div>
+        <p className="card-label">Project details</p>
         <span className={`status-badge status-${project.status}`}>
           <span className="status-dot" aria-hidden="true" />
           {statusLabels[project.status]}
@@ -65,6 +65,19 @@ export function ProjectOverview({
       <p className="project-description">
         {project.description || 'No project description provided.'}
       </p>
+
+      <section className="project-health" aria-labelledby="project-health-title">
+        <div className="project-health-heading">
+          <p className="card-label" id="project-health-title">Project health</p>
+          <span className={`health-badge health-${health.state}`}>
+            <span className="status-dot" aria-hidden="true" />
+            {health.label}
+          </span>
+        </div>
+        <p className="project-health-detail" role={health.state === 'loading' ? 'status' : undefined}>
+          {health.detail}
+        </p>
+      </section>
 
       <dl className="project-facts">
         <div className="project-fact">

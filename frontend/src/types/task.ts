@@ -49,6 +49,11 @@ export type TaskRiskSignal =
   | IncompleteDependencyRiskSignal
   | UnresolvedDependencyRiskSignal
 
+export interface TaskDependency {
+  id: string
+  title: string
+}
+
 export interface ProjectTaskSummary {
   id: string
   project_id: string
@@ -59,6 +64,7 @@ export interface ProjectTaskSummary {
   owner: string | null
   due_date: string | null
   risk_signals: TaskRiskSignal[]
+  dependencies: TaskDependency[]
 }
 
 export interface Task {

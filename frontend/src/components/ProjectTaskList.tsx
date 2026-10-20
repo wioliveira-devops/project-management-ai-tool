@@ -1,4 +1,6 @@
 import type { ProjectTaskSummary, TaskPriority, TaskRiskSignal, TaskStatus } from '../types/task'
+import { getTotalTaskCount } from '../features/tasks/totalTasks'
+import { TaskStatusSummary } from './TaskStatusSummary'
 
 type ProjectTaskListProps = {
   tasks: ProjectTaskSummary[]
@@ -13,6 +15,13 @@ const statusLabels: Record<TaskStatus, string> = {
   blocked: 'Blocked',
   completed: 'Completed',
 }
+
+const taskStatusOrder: TaskStatus[] = [
+  'not_started',
+  'in_progress',
+  'blocked',
+  'completed',
+]
 
 const priorityLabels: Record<TaskPriority, string> = {
   urgent: 'Urgent',
@@ -51,6 +60,12 @@ export function ProjectTaskList({
   errorMessage,
   onRetry,
 }: ProjectTaskListProps) {
+  const totalTaskCount = getTotalTaskCount(tasks)
+  const tasksByStatus = taskStatusOrder.map((status) => ({
+    status,
+    tasks: tasks.filter((task) => task.status === status),
+  }))
+
   return (
     <section className="task-list-card" aria-labelledby="task-list-title">
       <div className="task-list-heading">
@@ -59,11 +74,15 @@ export function ProjectTaskList({
           <h2 id="task-list-title">Tasks</h2>
         </div>
         {state === 'ready' && (
-          <span className="task-count">
-            {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
+          <span className="task-count" aria-label={`${totalTaskCount} total ${totalTaskCount === 1 ? 'task' : 'tasks'}`}>
+            Total: {totalTaskCount}
           </span>
         )}
       </div>
+
+      {state === 'ready' && (
+        <TaskStatusSummary tasks={tasks} />
+      )}
 
       {state === 'loading' && (
         <p className="task-list-message" role="status">
@@ -87,22 +106,24 @@ export function ProjectTaskList({
       {state === 'ready' && tasks.length > 0 && (
         <ul className="task-list">
           {tasks.map((task) => (
-            <li className="task-list-item" key={task.id}>
+            <li
+              className="task-list-item"
+              id={`task-${encodeURIComponent(task.id)}`}
+              key={task.id}
+              tabIndex={-1}
+            >
               <span className="task-list-icon" aria-hidden="true">○</span>
               <div className="task-list-content">
                 <div className="task-list-item-heading">
-                  <h3>{task.title}</h3>
-                  <span className={`task-status status-${task.status}`}>
-                    {statusLabels[task.status]}
-                  </span>
-                  {task.risk_signals.map((signal, index) => (
-                    <span
-                      className={`task-risk severity-${signal.severity}`}
-                      key={`${signal.rule_id}-${index}`}
-                    >
-                      {riskSignalLabel(signal)} · {signal.severity} severity
-                    </span>
-                  ))}
+                    <h4>{task.title}</h4>
+                    {task.risk_signals.map((signal, index) => (
+                      <span
+                        className={`task-risk severity-${signal.severity}`}
+                        key={`${signal.rule_id}-${index}`}
+                      >
+                        {riskSignalLabel(signal)} · {signal.severity} severity
+                      </span>
+                    ))}
                   <span
                     className={`task-priority priority-${task.priority ?? 'unset'}`}
                   >
@@ -120,6 +141,16 @@ export function ProjectTaskList({
                     <span>{formatDueDate(task.due_date)}</span>
                   </p>
                 </div>
+                {task.dependencies.length > 0 && (
+                  <div className="task-dependencies">
+                    <p className="task-dependencies-label">Depends on</p>
+                    <ul>
+                      {task.dependencies.map((dependency) => (
+                        <li key={dependency.id}>{dependency.title}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </li>
           ))}
