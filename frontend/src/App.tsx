@@ -5,6 +5,7 @@ import { ProjectRiskList } from './components/ProjectRiskList'
 import { ProjectTaskList } from './components/ProjectTaskList'
 import { UpcomingDeadlineList } from './components/UpcomingDeadlineList'
 import { getProjectHealth } from './features/projects/projectHealth'
+import { useProjectHealth } from './features/projects/useProjectHealth'
 import { useProject } from './features/projects/useProject'
 import { useProjectTasks } from './features/tasks/useProjectTasks'
 import './App.css'
@@ -12,7 +13,8 @@ import './App.css'
 function App() {
   const { project, state, errorMessage, loadProject } = useProject()
   const taskList = useProjectTasks(project?.id ?? null)
-  const projectHealth = getProjectHealth(taskList.tasks, taskList.state)
+  const healthAssessment = useProjectHealth(project?.id ?? null)
+  const projectHealth = getProjectHealth(healthAssessment.assessment, healthAssessment.state)
 
   return (
     <main className="app-shell">
@@ -39,6 +41,7 @@ function App() {
             state={state}
             errorMessage={errorMessage}
             onRetry={() => void loadProject()}
+            onRetryHealth={() => void healthAssessment.loadAssessment()}
           />
           {project && (
             <div className="dashboard-work-column">

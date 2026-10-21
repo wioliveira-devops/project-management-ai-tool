@@ -7,6 +7,7 @@ type ProjectOverviewProps = {
   state: 'loading' | 'ready' | 'error'
   errorMessage: string
   onRetry: () => void
+  onRetryHealth: () => void
 }
 
 const statusLabels: Record<ProjectStatus, string> = {
@@ -31,6 +32,7 @@ export function ProjectOverview({
   state,
   errorMessage,
   onRetry,
+  onRetryHealth,
 }: ProjectOverviewProps) {
   if (state === 'loading') {
     return (
@@ -77,6 +79,11 @@ export function ProjectOverview({
         <p className="project-health-detail" role={health.state === 'loading' ? 'status' : undefined}>
           {health.detail}
         </p>
+        {health.state === 'unavailable' && (
+          <button className="health-retry" type="button" onClick={onRetryHealth}>
+            Retry health assessment
+          </button>
+        )}
       </section>
 
       <dl className="project-facts">

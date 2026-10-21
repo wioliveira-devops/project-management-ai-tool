@@ -1,5 +1,4 @@
-import type { ProjectTaskSummary } from '../../types/task'
-import { getOverdueTasks } from '../tasks/overdueTasks'
+import type { ProjectHealthAssessment, ProjectHealthState } from '../../types/projectHealth'
 
 export type ProjectHealth = {
   state: 'loading' | 'unavailable' | 'insufficient' | 'on-track' | 'at-risk' | 'needs-attention'
@@ -7,54 +6,54 @@ export type ProjectHealth = {
   detail: string
 }
 
-type TaskListState = 'loading' | 'ready' | 'error'
+type AssessmentRequestState = 'loading' | 'ready' | 'error'
 
-function countLabel(count: number, singular: string): string {
-  return `${count} ${singular}${count === 1 ? '' : 's'}`
+const healthLabels: Record<ProjectHealthState, string> = {
+  insufficient: 'Not enough data',
+  'on-track': 'On track',
+  'at-risk': 'At risk',
+  'needs-attention': 'Needs attention',
 }
 
 export function getProjectHealth(
-  tasks: ProjectTaskSummary[],
-  taskState: TaskListState,
+  assessment: ProjectHealthAssessment | null,
+  requestState: AssessmentRequestState,
 ): ProjectHealth {
-  if (taskState === 'loading') {
+  if (requestState === 'loading') {
     return { state: 'loading', label: 'Calculating', detail: 'Waiting for task data.' }
   }
 
-  if (taskState === 'error') {
-    return { state: 'unavailable', label: 'Unavailable', detail: 'Task data could not be loaded.' }
+  if (requestState === 'error' || !assessment) {
+    return { state: 'unavailable', label: 'Unavailable', detail: 'Project health could not be calculated.' }
   }
 
-  if (tasks.length === 0) {
-    return { state: 'insufficient', label: 'Not enough data', detail: 'Add project tasks to assess health.' }
+  const { indicators, state } = assessment
+  const label = healthLabels[state]
+
+  if (state === 'insufficient') {
+    return { state, label, detail: 'Add project tasks to assess health.' }
   }
 
-  const blockedCount = tasks.filter((task) => task.status === 'blocked').length
-  const overdueCount = getOverdueTasks(tasks).length
-
-  if (blockedCount > 0) {
-    const signals = [
-      countLabel(blockedCount, 'blocked task'),
-      ...(overdueCount > 0 ? [countLabel(overdueCount, 'overdue task')] : []),
-    ]
-    return {
-      state: 'needs-attention',
-      label: 'Needs attention',
-      detail: `${signals.join(' and ')} need review.`,
-    }
+  if (state === 'on-track') {
+    return { state, label, detail: 'No blocking health indicators were found.' }
   }
 
-  if (overdueCount > 0) {
-    return {
-      state: 'at-risk',
-      label: 'At risk',
-      detail: `${countLabel(overdueCount, 'overdue task')} need review.`,
-    }
-  }
+  const concerns = [
+    indicators.blocked_tasks > 0 && `${indicators.blocked_tasks} blocked`,
+    indicators.high_priority_overdue_tasks > 0
+      && `${indicators.high_priority_overdue_tasks} high-priority overdue`,
+    indicators.overdue_tasks > 0 && `${indicators.overdue_tasks} overdue`,
+    indicators.approaching_deadline_tasks > 0
+      && `${indicators.approaching_deadline_tasks} approaching deadline`,
+    indicators.tasks_with_unresolved_dependencies > 0
+      && `${indicators.tasks_with_unresolved_dependencies} with unresolved dependencies`,
+    indicators.tasks_with_incomplete_dependencies > 0
+      && `${indicators.tasks_with_incomplete_dependencies} with incomplete dependencies`,
+  ].filter(Boolean)
 
   return {
-    state: 'on-track',
-    label: 'On track',
-    detail: 'No blocked or overdue tasks found.',
+    state,
+    label,
+    detail: `${concerns.join(', ')}. Review these project health indicators.`,
   }
 }

@@ -809,6 +809,20 @@
   line-height: 1.5;
 }
 
+.health-retry {
+  margin-top: 0.8rem;
+  padding: 0;
+  color: #365fce;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 650;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.health-retry:hover { text-decoration: underline; }
+
 .status-dot {
   width: 0.45rem;
   height: 0.45rem;

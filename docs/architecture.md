@@ -152,7 +152,7 @@ Proposed endpoints:
 | `GET /api/projects` | List projects |
 | `GET /api/projects/{project_id}` | Retrieve project details |
 | `GET /api/projects/{project_id}/tasks` | Retrieve project tasks |
-| `GET /api/projects/{project_id}/analysis` | Calculate project health indicators |
+| `GET /api/projects/{project_id}/analysis` | Calculate project health state and supporting indicators; see [project health calculation](data-model/project-health-calculation.md) |
 | `POST /api/projects/{project_id}/insights` | Generate AI-assisted insights |
 
 These endpoints are initial design proposals. Implement them incrementally and adjust them only when justified by actual requirements.
