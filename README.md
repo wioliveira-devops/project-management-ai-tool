@@ -68,7 +68,7 @@ cd backend
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install "fastapi[standard]" ruff
+pip install "fastapi[standard]" openai ruff
 ```
 
 Start the API:
@@ -115,3 +115,12 @@ Database persistence, project management features, AI-powered analysis, automate
 - Never commit API keys, passwords, or other secrets.
 - Keep local environment files out of version control.
 - Store future OpenAI API credentials on the backend, never in frontend code.
+
+## AI project summary
+
+The dashboard can request an AI-generated project summary on demand. Configure
+`OPENAI_API_KEY` in the backend process environment before using the feature.
+The optional `OPENAI_MODEL` setting selects the model; it defaults to
+`gpt-4.1-mini`. The key is read only by the backend and is never sent to the
+browser. If the key is missing or the provider is unavailable, the dashboard
+keeps its deterministic project health and task views available.

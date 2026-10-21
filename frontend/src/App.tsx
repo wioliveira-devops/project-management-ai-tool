@@ -1,4 +1,5 @@
 import { ProjectOverview } from './components/ProjectOverview'
+import { ProjectSummaryCard } from './components/ProjectSummaryCard'
 import { CriticalItemsList } from './components/CriticalItemsList'
 import { ProjectRecommendationList } from './components/ProjectRecommendationList'
 import { ProjectRiskList } from './components/ProjectRiskList'
@@ -45,6 +46,7 @@ function App() {
           />
           {project && (
             <div className="dashboard-work-column">
+              <ProjectSummaryCard projectId={project.id} />
               {taskList.state === 'ready' && (
                 <>
                   <CriticalItemsList tasks={taskList.tasks} />

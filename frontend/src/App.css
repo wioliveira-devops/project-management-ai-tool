@@ -119,6 +119,48 @@
 .risk-card { border: 1px solid #e6dfea; }
 .recommendation-card { border: 1px solid #dce8e5; }
 
+.summary-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: #fff;
+  border: 1px solid #dce5f6;
+  border-radius: 1rem;
+  box-shadow: 0 0.8rem 2rem rgb(29 48 79 / 4%);
+}
+
+.summary-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid #e8edf5;
+}
+
+.summary-heading .card-label { margin-bottom: 0.35rem; }
+.summary-heading h2 { margin: 0; color: #1d2d45; font-size: 1.2rem; }
+
+.summary-heading button {
+  flex: 0 0 auto;
+  padding: 0.6rem 0.85rem;
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 650;
+  background: #365fce;
+  border: 0;
+  border-radius: 0.55rem;
+  cursor: pointer;
+}
+
+.summary-heading button:hover { background: #294daa; }
+.summary-heading button:disabled { opacity: 0.65; cursor: wait; }
+.summary-placeholder,
+.summary-message { margin: 1rem 0 0; color: #607086; font-size: 0.9rem; line-height: 1.55; }
+.summary-text { margin: 1rem 0 0; color: #25354b; font-size: 0.95rem; line-height: 1.7; white-space: pre-wrap; }
+.summary-meta { margin: 0.85rem 0 0; color: #718096; font-size: 0.76rem; line-height: 1.5; }
+.summary-error { margin: 1rem 0 0; color: #9d342e; font-size: 0.88rem; line-height: 1.5; }
+
 .attention-heading {
   display: flex;
   align-items: flex-end;
@@ -892,6 +934,7 @@
 }
 
 @media (max-width: 640px) {
+  .summary-heading { align-items: flex-start; flex-direction: column; }
   .project-card-heading { flex-direction: column; }
   .project-facts { grid-template-columns: 1fr; gap: 1.15rem; }
   .task-list-item-heading { flex-direction: column; gap: 0.45rem; }
