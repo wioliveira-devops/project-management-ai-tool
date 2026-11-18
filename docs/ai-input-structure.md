@@ -125,7 +125,24 @@ deterministic and is included with its analysis date so an AI interpretation
 can be traced to the calculations and project context it received. AI
 interpretations and recommendations remain distinct from these source values.
 
+Risk explanation generation receives the project context and health assessment
+alongside each task's risk signals. The prompt may use the project description,
+lifecycle status, dates, and health state to contextualize an explanation when
+they directly help explain its relevance to the stated project goal or schedule.
+It must not infer critical-path status, project-level impact, or other facts
+that the supplied context does not establish. Owner details remain excluded.
+
 The input contract does not include credentials, frontend state, or database
 details. This selection step minimizes the payload to the context currently
 needed for project insights; later preparation and validation steps can further
 constrain it for a specific analysis request.
+
+## Risk explanation output
+
+The risk explanation endpoint returns an object containing a
+`risk_explanations` array. Each entry contains the `task_id` and `rule_id` of
+one supplied risk signal and a non-empty `explanation` of up to 500 characters.
+Unknown fields and blank values are rejected. The validator also checks that
+each input signal has exactly one matching output entry, rejecting omissions,
+duplicates, and explanations for unknown task/rule pairs. AI output is treated
+as untrusted until it passes this validation.

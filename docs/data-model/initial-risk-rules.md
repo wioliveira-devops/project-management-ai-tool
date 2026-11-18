@@ -9,6 +9,55 @@ This document defines the first deterministic risk signals for project task data
 - A rule produces a risk signal with the rule identifier, affected task ID, and the source values that caused it to match. Keep distinct matching rules as distinct signals, even when they affect the same task.
 - Missing optional values do not satisfy a rule. Do not infer dates, priorities, or dependency completion from absent data.
 
+## Risk information format
+
+Represent each detected risk as one structured signal attached to its affected
+task. Keep the signal separate from any AI-written explanation: the signal is
+the machine-checked evidence, while generated wording is an interpretation of
+that evidence.
+
+Every signal has this common envelope:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `rule_id` | string | Stable identifier of the rule that matched. |
+| `severity` | `low`, `medium`, or `high` | Deterministic priority assigned to the signal. |
+| `task_id` | non-empty string | ID of the task affected by the signal. |
+
+Include rule-specific evidence alongside the envelope. Dates use ISO 8601
+calendar dates (`YYYY-MM-DD`); dependency evidence uses IDs and source statuses
+from the same project's task data. The accepted evidence fields are:
+
+| `rule_id` | Additional fields |
+|---|---|
+| `blocked-work` | `status` (`blocked`) |
+| `overdue-task` | `due_date`, `analysis_date` |
+| `high-priority-overdue-task` | `priority` (`high` or `urgent`), `due_date`, `analysis_date` |
+| `incomplete-dependency` | `prerequisites`: array of `{task_id, status}` |
+| `unresolved-dependency` | `dependency_ids`: array of unresolved IDs |
+| `approaching-deadline` | `due_date`, `analysis_date` |
+
+For example, a high-priority overdue task is represented as:
+
+```json
+{
+  "rule_id": "high-priority-overdue-task",
+  "severity": "high",
+  "task_id": "task-design-account-overview",
+  "priority": "high",
+  "due_date": "2026-10-18",
+  "analysis_date": "2026-10-21"
+}
+```
+
+Store signals in the affected task's `risk_signals` array. Keep each matched
+rule as its own signal, even when several signals refer to the same task. Do
+not add a free-form explanation to the signal: AI-generated explanations and
+recommendations belong in a separate response structure, so they cannot be
+mistaken for source evidence. Reject unknown fields and invalid values during
+validation. The AI input contract in `../ai-input-structure.md` describes the
+validated project payload that carries these signals.
+
 ## Initial rules
 
 | ID | Risk signal | Trigger | Exclusions and evidence |

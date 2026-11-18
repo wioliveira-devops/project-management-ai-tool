@@ -8,11 +8,17 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.project_summary import ProjectSummarySchema
+from app.schemas.risk_explanation import RiskExplanationsResponseSchema
 from app.services.ai_input import prepare_ai_insights_input
 from app.services.project_summary import (
     ProjectSummaryError,
     ProjectSummaryNotConfigured,
     generate_project_summary,
+)
+from app.services.risk_explanations import (
+    RiskExplanationError,
+    RiskExplanationNotConfigured,
+    generate_risk_explanations,
 )
 
 router = APIRouter()
@@ -46,3 +52,28 @@ def create_project_summary(project_id: str) -> dict[str, Any]:
         "analysis_date": analysis_date,
         "generated_at": datetime.now(timezone.utc),
     }
+
+
+@router.post(
+    "/projects/{project_id}/risk-explanations",
+    response_model=RiskExplanationsResponseSchema,
+)
+def create_project_risk_explanations(
+    project_id: str,
+) -> dict[str, list[dict[str, str]]]:
+    """Generate explanations for the project's deterministic risk signals."""
+    project = json.loads(SAMPLE_PROJECT_PATH.read_text(encoding="utf-8"))
+    if project["id"] != project_id:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    tasks = json.loads(SAMPLE_TASKS_PATH.read_text(encoding="utf-8"))
+    context = prepare_ai_insights_input(project, tasks, date.today())
+    try:
+        explanations = generate_risk_explanations(context)
+    except RiskExplanationError as error:
+        status_code = (
+            503 if isinstance(error, RiskExplanationNotConfigured) else 502
+        )
+        raise HTTPException(status_code=status_code, detail=str(error)) from error
+
+    return {"risk_explanations": explanations}
