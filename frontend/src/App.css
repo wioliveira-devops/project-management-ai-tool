@@ -210,6 +210,28 @@
 .risk-card .attention-count { color: #67477b; background: #f4eef8; }
 .recommendation-card .attention-count { color: #286351; background: #eaf5f1; }
 
+.recommendation-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.recommendation-controls button {
+  flex: 0 0 auto;
+  padding: 0.55rem 0.75rem;
+  color: #fff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 650;
+  background: #286351;
+  border: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.recommendation-controls button:hover { background: #204f42; }
+.recommendation-controls button:disabled { opacity: 0.65; cursor: wait; }
+
 .recommendation-scope {
   margin: 0.65rem 0 0;
   color: #718096;
@@ -263,6 +285,35 @@
   font-size: 0.8rem;
   line-height: 1.5;
 }
+
+.recommendation-heading .recommendation-action-label {
+  margin-top: 0.5rem;
+  color: #286351;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.recommendation-heading .recommendation-action {
+  margin-top: 0.15rem;
+  color: #344b45;
+}
+
+.recommendation-rationale {
+  margin: 0.55rem 0 0 2.1rem;
+  color: #607086;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.recommendation-message,
+.recommendation-error {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.recommendation-message { color: #607086; }
+.recommendation-error { color: #9d342e; }
 
 .recommendation-related-label {
   margin: 0.65rem 0 0.25rem 2.1rem;

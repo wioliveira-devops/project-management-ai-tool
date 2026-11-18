@@ -8,12 +8,18 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.project_summary import ProjectSummarySchema
+from app.schemas.recommendation import RecommendationsResponseSchema
 from app.schemas.risk_explanation import RiskExplanationsResponseSchema
 from app.services.ai_input import prepare_ai_insights_input
 from app.services.project_summary import (
     ProjectSummaryError,
     ProjectSummaryNotConfigured,
     generate_project_summary,
+)
+from app.services.recommendations import (
+    RecommendationError,
+    RecommendationNotConfigured,
+    generate_recommendations,
 )
 from app.services.risk_explanations import (
     RiskExplanationError,
@@ -77,3 +83,28 @@ def create_project_risk_explanations(
         raise HTTPException(status_code=status_code, detail=str(error)) from error
 
     return {"risk_explanations": explanations}
+
+
+@router.post(
+    "/projects/{project_id}/recommendations",
+    response_model=RecommendationsResponseSchema,
+)
+def create_project_recommendations(
+    project_id: str,
+) -> dict[str, list[dict[str, Any]]]:
+    """Generate structured, evidence-linked recommendations for a project."""
+    project = json.loads(SAMPLE_PROJECT_PATH.read_text(encoding="utf-8"))
+    if project["id"] != project_id:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    tasks = json.loads(SAMPLE_TASKS_PATH.read_text(encoding="utf-8"))
+    context = prepare_ai_insights_input(project, tasks, date.today())
+    try:
+        recommendations = generate_recommendations(context)
+    except RecommendationError as error:
+        status_code = (
+            503 if isinstance(error, RecommendationNotConfigured) else 502
+        )
+        raise HTTPException(status_code=status_code, detail=str(error)) from error
+
+    return {"recommendations": recommendations}

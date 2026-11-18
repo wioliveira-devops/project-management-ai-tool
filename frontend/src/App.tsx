@@ -54,10 +54,10 @@ function App() {
                 </>
               )}
               {taskList.state === 'ready' && taskList.tasks.length > 0 && (
-                <>
-                  <ProjectRiskList tasks={taskList.tasks} />
-                  <ProjectRecommendationList tasks={taskList.tasks} />
-                </>
+                <ProjectRiskList tasks={taskList.tasks} />
+              )}
+              {taskList.state === 'ready' && (
+                <ProjectRecommendationList projectId={project.id} tasks={taskList.tasks} />
               )}
               <ProjectTaskList
                 tasks={taskList.tasks}
