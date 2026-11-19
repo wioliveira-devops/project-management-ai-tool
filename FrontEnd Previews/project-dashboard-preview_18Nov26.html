@@ -1,0 +1,184 @@
+<div id="project-dashboard-preview">
+  <style>
+    #project-dashboard-preview {
+      --pm-ink: light-dark(#182230, #e8edf5);
+      --pm-heading: light-dark(#172b4d, #edf3ff);
+      --pm-muted: light-dark(#607086, #aab7c8);
+      --pm-faint: light-dark(#718096, #91a0b4);
+      --pm-bg: light-dark(#f5f7fa, #111827);
+      --pm-surface: light-dark(#ffffff, #1b2432);
+      --pm-line: light-dark(#e1e7ef, #334154);
+      --pm-blue: light-dark(#365fce, #89a8ff);
+      --pm-green: light-dark(#216b49, #79c99a);
+      --pm-amber: light-dark(#96500d, #e9ba6a);
+      --pm-red: light-dark(#a32f35, #ff9292);
+      --pm-purple: light-dark(#67477b, #c7a6df);
+      color: var(--pm-ink);
+      font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    #project-dashboard-preview * { box-sizing: border-box; }
+    #project-dashboard-preview .window { overflow: hidden; background: var(--pm-bg); border: 1px solid var(--pm-line); border-radius: 14px; }
+    #project-dashboard-preview .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 28px; background: var(--pm-surface); border-bottom: 1px solid var(--pm-line); }
+    #project-dashboard-preview .brand { display: flex; align-items: center; gap: 10px; color: var(--pm-heading); font-weight: 700; }
+    #project-dashboard-preview .brand-mark { display: grid; width: 30px; height: 30px; place-items: center; color: white; background: #365fce; border-radius: 8px; }
+    #project-dashboard-preview .topbar-label { color: var(--pm-muted); }
+    #project-dashboard-preview .content { max-width: 1200px; margin: 0 auto; padding: 30px 28px 36px; }
+    #project-dashboard-preview .eyebrow, #project-dashboard-preview .label { margin: 0 0 6px; color: var(--pm-muted); font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    #project-dashboard-preview h1 { margin: 0; color: var(--pm-heading); font-size: clamp(25px, 3vw, 34px); line-height: 1.2; letter-spacing: -.04em; }
+    #project-dashboard-preview h2 { margin: 0; color: var(--pm-heading); font-size: 17px; line-height: 1.35; }
+    #project-dashboard-preview h3 { margin: 0; color: var(--pm-ink); font-size: 13px; line-height: 1.4; }
+    #project-dashboard-preview p { margin-top: 0; }
+    #project-dashboard-preview .intro { margin: 7px 0 0; color: var(--pm-muted); }
+    #project-dashboard-preview .layout { display: grid; grid-template-columns: minmax(260px, .82fr) minmax(0, 1.18fr); align-items: start; gap: 18px; margin-top: 22px; }
+    #project-dashboard-preview .stack { display: grid; min-width: 0; gap: 15px; }
+    #project-dashboard-preview .card { min-width: 0; padding: 20px; background: var(--pm-surface); border: 1px solid var(--pm-line); border-radius: 13px; box-shadow: 0 8px 24px rgb(29 48 79 / 4%); }
+    #project-dashboard-preview .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--pm-line); }
+    #project-dashboard-preview .card-head .label { margin-bottom: 4px; }
+    #project-dashboard-preview .badge { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+    #project-dashboard-preview .badge-green { color: var(--pm-green); background: light-dark(#e8f6ee, #18382a); }
+    #project-dashboard-preview .badge-amber { color: var(--pm-amber); background: light-dark(#fff4e5, #3a2d1c); }
+    #project-dashboard-preview .badge-red { color: var(--pm-red); background: light-dark(#fff0f0, #422629); }
+    #project-dashboard-preview .badge-blue { color: var(--pm-blue); background: light-dark(#eaf1ff, #24334e); }
+    #project-dashboard-preview .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    #project-dashboard-preview .description { margin: 14px 0 0; color: var(--pm-muted); line-height: 1.65; }
+    #project-dashboard-preview .health { margin-top: 18px; padding: 13px; background: light-dark(#f8faff, #202b3b); border: 1px solid var(--pm-line); border-radius: 10px; }
+    #project-dashboard-preview .health-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    #project-dashboard-preview .health-head .label { margin: 0; }
+    #project-dashboard-preview .health p:last-child { margin: 8px 0 0; color: var(--pm-muted); font-size: 12px; }
+    #project-dashboard-preview .facts { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0,1fr)); margin: 18px 0 0; padding-top: 15px; border-top: 1px solid var(--pm-line); }
+    #project-dashboard-preview .fact dt { margin-bottom: 3px; color: var(--pm-faint); font-size: 11px; }
+    #project-dashboard-preview .fact dd { margin: 0; color: var(--pm-ink); font-weight: 650; }
+    #project-dashboard-preview .fact small { display: block; color: var(--pm-faint); font-size: 11px; }
+    #project-dashboard-preview .action { padding: 8px 11px; color: white; background: #365fce; border: 0; border-radius: 7px; font: inherit; font-size: 11px; font-weight: 700; }
+    #project-dashboard-preview .ai-text { margin: 13px 0 0; color: var(--pm-muted); font-size: 12px; }
+    #project-dashboard-preview .disclosure { display: flex; gap: 7px; align-items: flex-start; margin: 12px 0 0; color: var(--pm-muted); font-size: 11px; }
+    #project-dashboard-preview .disclosure b { color: var(--pm-purple); }
+    #project-dashboard-preview .attention .card-head { border-color: light-dark(#f0e4dc, #3c3440); }
+    #project-dashboard-preview .attention .label { color: var(--pm-faint); }
+    #project-dashboard-preview .attention .card-head h2 { color: var(--pm-heading); }
+    #project-dashboard-preview .count { flex: 0 0 auto; padding: 4px 8px; color: var(--pm-amber); background: light-dark(#fff4e5, #3a2d1c); border-radius: 999px; font-size: 11px; font-weight: 700; }
+    #project-dashboard-preview .row { padding: 12px 0 10px; border-bottom: 1px solid var(--pm-line); }
+    #project-dashboard-preview .row:last-child { padding-bottom: 0; border-bottom: 0; }
+    #project-dashboard-preview .row-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    #project-dashboard-preview .row p { margin: 5px 0 0; color: var(--pm-muted); font-size: 11px; }
+    #project-dashboard-preview .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    #project-dashboard-preview .chip { padding: 3px 7px; color: var(--pm-amber); background: light-dark(#fff4e5, #3a2d1c); border-radius: 999px; font-size: 10px; font-weight: 700; }
+    #project-dashboard-preview .chip.red { color: var(--pm-red); background: light-dark(#fff0f0, #422629); }
+    #project-dashboard-preview .chip.purple { color: var(--pm-purple); background: light-dark(#f4eef8, #32293b); }
+    #project-dashboard-preview .meta { display: flex; flex-wrap: wrap; gap: 8px 13px; margin-top: 8px; color: var(--pm-faint); font-size: 10px; }
+    #project-dashboard-preview .summary-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 7px; margin-top: 14px; }
+    #project-dashboard-preview .summary-cell { min-width: 0; padding: 9px 8px; background: light-dark(#f5f7fb, #202b3b); border-radius: 8px; }
+    #project-dashboard-preview .summary-cell strong { display: block; color: var(--pm-ink); font-size: 17px; line-height: 1.1; }
+    #project-dashboard-preview .summary-cell span { display: block; margin-top: 4px; color: var(--pm-muted); font-size: 9px; line-height: 1.25; }
+    #project-dashboard-preview .progress { display: flex; height: 8px; overflow: hidden; margin-top: 10px; background: light-dark(#edf0f5, #283344); border-radius: 999px; }
+    #project-dashboard-preview .progress span:nth-child(1) { width: 25%; background: #3c9a68; }
+    #project-dashboard-preview .progress span:nth-child(2) { width: 25%; background: #4f75d6; }
+    #project-dashboard-preview .progress span:nth-child(3) { width: 50%; background: #aab5c4; }
+    #project-dashboard-preview .task { display: flex; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--pm-line); }
+    #project-dashboard-preview .task:last-child { border-bottom: 0; }
+    #project-dashboard-preview .task-icon { display: grid; flex: 0 0 auto; width: 22px; height: 22px; place-items: center; color: var(--pm-blue); background: light-dark(#edf2ff, #24334e); border-radius: 6px; font-size: 12px; }
+    #project-dashboard-preview .task-main { flex: 1; min-width: 0; }
+    #project-dashboard-preview .task-main > p { margin: 4px 0 0; color: var(--pm-muted); font-size: 11px; }
+    #project-dashboard-preview .task-title { display: flex; justify-content: space-between; gap: 10px; }
+    #project-dashboard-preview .task-title h3 { font-size: 12px; }
+    #project-dashboard-preview .status { flex: 0 0 auto; padding: 3px 7px; color: var(--pm-muted); background: light-dark(#f0f3f8, #283344); border-radius: 999px; font-size: 10px; font-weight: 700; }
+    #project-dashboard-preview .status.done { color: var(--pm-green); background: light-dark(#e8f6ee, #18382a); }
+    #project-dashboard-preview .status.progressing { color: var(--pm-blue); background: light-dark(#eaf1ff, #24334e); }
+    #project-dashboard-preview .task-meta { display: flex; flex-wrap: wrap; gap: 5px 14px; margin-top: 5px; color: var(--pm-faint); font-size: 10px; }
+    #project-dashboard-preview .empty { padding: 12px 0 0; color: var(--pm-muted); font-size: 11px; }
+    @media (max-width: 760px) {
+      #project-dashboard-preview .content { padding: 22px 16px; }
+      #project-dashboard-preview .topbar { padding: 12px 16px; }
+      #project-dashboard-preview .layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 460px) {
+      #project-dashboard-preview .facts { grid-template-columns: 1fr 1fr; }
+      #project-dashboard-preview .summary-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      #project-dashboard-preview .card { padding: 16px; }
+    }
+  </style>
+  <div class="window" aria-label="Project workspace dashboard preview">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">P</span><span>Project workspace</span></div>
+      <span class="topbar-label">Dashboard</span>
+    </header>
+    <main class="content">
+      <p class="eyebrow">Project dashboard</p>
+      <h1>Customer Portal Modernization</h1>
+      <p class="intro">A concise view of your project and its work.</p>
+      <div class="layout">
+        <div class="stack">
+          <section class="card" aria-labelledby="overview-title">
+            <div class="card-head">
+              <div><p class="label">Project details</p><h2 id="overview-title">Project overview</h2></div>
+              <span class="badge badge-green"><span class="dot"></span>Active</span>
+            </div>
+            <p class="description">Redesign the customer self-service portal so customers can manage their accounts, review invoices, and find support resources in one accessible, mobile-friendly experience.</p>
+            <div class="health">
+              <div class="health-head"><p class="label">Project health</p><span class="badge badge-red"><span class="dot"></span>Needs attention</span></div>
+              <p>1 high-priority task overdue. Review the source tasks and prerequisites.</p>
+            </div>
+            <dl class="facts">
+              <div class="fact"><dt>Project owner</dt><dd>Maya Chen</dd><small>Product Manager</small></div>
+              <div class="fact"><dt>Start date</dt><dd>Sep 1, 2026</dd></div>
+              <div class="fact"><dt>Target end date</dt><dd>Dec 18, 2026</dd></div>
+            </dl>
+          </section>
+          <section class="card" aria-labelledby="summary-title">
+            <div class="card-head">
+              <div><p class="label">AI insight</p><h2 id="summary-title">Project summary</h2></div>
+              <button class="action" type="button">Generate summary</button>
+            </div>
+            <p class="ai-text">Get a concise readout of project progress and the main areas to watch.</p>
+            <p class="disclosure"><b>AI-generated</b><span>Summary is created on request and should be checked against project data.</span></p>
+          </section>
+          <section class="card attention" aria-labelledby="critical-title">
+            <div class="card-head"><div><p class="label">Needs attention</p><h2 id="critical-title">Critical items</h2></div><span class="count">3 tasks</span></div>
+            <div class="row"><div class="row-head"><h3>Map current account and billing journeys</h3><span class="status progressing">In progress</span></div><div class="chips"><span class="chip">Overdue</span></div><div class="meta"><span>Overdue since Oct 10, 2026</span><span>Owner: Unassigned</span></div></div>
+            <div class="row"><div class="row-head"><h3>Design the accessible account overview</h3><span class="status progressing">In progress</span></div><div class="chips"><span class="chip red">Overdue</span><span class="chip red">High priority</span></div><div class="meta"><span>Overdue since Oct 30, 2026</span><span>Owner: Unassigned</span></div></div>
+            <div class="row"><div class="row-head"><h3>Validate mobile usability and accessibility</h3><span class="status">Not started</span></div><div class="chips"><span class="chip red">High priority</span></div><div class="meta"><span>Due Dec 10, 2026</span><span>Owner: Unassigned</span></div></div>
+          </section>
+          <section class="card attention" aria-labelledby="deadline-title">
+            <div class="card-head"><div><p class="label">Next seven days</p><h2 id="deadline-title">Upcoming deadlines</h2></div><span class="count">2 tasks</span></div>
+            <div class="row"><div class="row-head"><h3>Build profile and notification settings</h3><span class="status">Not started</span></div><div class="meta"><span>Due Nov 20, 2026</span><span>Owner: Unassigned</span></div></div>
+            <div class="row"><div class="row-head"><h3>Create a searchable support resource center</h3><span class="status">Not started</span></div><div class="meta"><span>Due Nov 20, 2026</span><span>Owner: Unassigned</span></div></div>
+          </section>
+          <section class="card attention" aria-labelledby="risk-title">
+            <div class="card-head"><div><p class="label">Risk signals</p><h2 id="risk-title">Identified risks</h2></div><span class="count">2 risks</span></div>
+            <p class="ai-text">Based on blocked and overdue task data.</p>
+            <div class="row"><div class="row-head"><div><h3>Missed task deadline</h3><p>Design the accessible account overview</p></div><span class="badge badge-red">High severity</span></div><p>This incomplete task has passed its due date.</p><div class="meta"><span>In progress</span><span>Due Oct 30, 2026</span><span>High priority</span></div></div>
+            <div class="row"><div class="row-head"><div><h3>Missed task deadline</h3><p>Map current account and billing journeys</p></div><span class="badge badge-amber">Medium severity</span></div><p>This incomplete task has passed its due date.</p><div class="meta"><span>In progress</span><span>Due Oct 10, 2026</span><span>Medium priority</span></div></div>
+          </section>
+        </div>
+        <div class="stack">
+          <section class="card attention" aria-labelledby="recommendation-title">
+            <div class="card-head"><div><p class="label">Suggested actions</p><h2 id="recommendation-title">Key recommendations</h2></div><button class="action" type="button">Generate</button></div>
+            <p class="disclosure"><b>AI suggestions</b><span>Options are suggestions, not instructions. Review the evidence before acting.</span></p>
+            <p class="empty">Generate suggestions grounded in the current project data.</p>
+          </section>
+          <section class="card" aria-labelledby="tasks-title">
+            <div class="card-head"><div><p class="label">Project plan</p><h2 id="tasks-title">Tasks</h2></div><span class="badge badge-blue">Total: 8</span></div>
+            <div class="summary-grid" aria-label="Task status summary">
+              <div class="summary-cell"><strong>6</strong><span>Pending</span></div><div class="summary-cell"><strong>2</strong><span>Completed</span></div><div class="summary-cell"><strong>2</strong><span>In progress</span></div><div class="summary-cell"><strong>4</strong><span>Not started</span></div><div class="summary-cell"><strong>0</strong><span>Blocked</span></div>
+            </div>
+            <div class="progress" role="img" aria-label="Task distribution: two completed, two in progress, four not started, none blocked"><span></span><span></span><span></span></div>
+            <div class="row"><p class="label">In progress · 2</p>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Map current account and billing journeys</h3><span class="status progressing">In progress</span></div><p>Document the current journeys and identify confusing steps.</p><div class="task-meta"><span>Medium priority</span><span>Due Oct 10, 2026</span><span>Unassigned</span></div></div></div>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Design the accessible account overview</h3><span class="status progressing">In progress</span></div><p>Prepare responsive designs for account details and billing activity.</p><div class="task-meta"><span>High priority</span><span>Due Oct 30, 2026</span><span>Unassigned</span></div></div></div>
+            </div>
+            <div class="row"><p class="label">Not started · 4</p>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Build profile and notification settings</h3><span class="status">Not started</span></div><p>Implement profile details and notification preferences.</p><div class="task-meta"><span>Medium priority</span><span>Due Nov 20, 2026</span><span>Unassigned</span><span>Depends on: Design the accessible account overview</span></div></div></div>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Connect the portal to invoice history</h3><span class="status">Not started</span></div><p>Integrate billing history and invoice details.</p><div class="task-meta"><span>Urgent</span><span>Due Nov 27, 2026</span><span>Unassigned</span></div></div></div>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Create a searchable support resource center</h3><span class="status">Not started</span></div><p>Organize help articles and service guidance.</p><div class="task-meta"><span>Low priority</span><span>Due Nov 20, 2026</span><span>Unassigned</span></div></div></div>
+              <div class="task"><span class="task-icon">○</span><div class="task-main"><div class="task-title"><h3>Validate mobile usability and accessibility</h3><span class="status">Not started</span></div><p>Review common screen sizes, keyboard navigation, contrast, and labels.</p><div class="task-meta"><span>High priority</span><span>Due Dec 10, 2026</span><span>Unassigned</span></div></div></div>
+            </div>
+            <div class="row"><p class="label">Completed · 2</p>
+              <div class="task"><span class="task-icon">✓</span><div class="task-main"><div class="task-title"><h3>Interview customers and support agents</h3><span class="status done">Completed</span></div><div class="task-meta"><span>High priority</span><span>Due Sep 18, 2026</span></div></div></div>
+              <div class="task"><span class="task-icon">✓</span><div class="task-main"><div class="task-title"><h3>Define portal navigation and content structure</h3><span class="status done">Completed</span></div><div class="task-meta"><span>High priority</span><span>Due Sep 30, 2026</span></div></div></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
