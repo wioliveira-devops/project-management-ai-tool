@@ -1,0 +1,217 @@
+[33mcommit 6e32fd8d712fb78d8c6cdb612359222a30d8f9a9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Thu Nov 19 11:42:00 2026 -0300
+
+    Project page preview - version 1.0
+    
+    First preview of project page
+
+[33mcommit 5708ab8fab66896197c03e03967a6d3439b79c39[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Wed Nov 18 14:14:15 2026 -0300
+
+    Tasks 77 to 82 are implemented
+
+[33mcommit 1951aba981da61165f85a3864c2bf71be472ef78[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Wed Nov 18 11:19:41 2026 -0300
+
+    Tasks 72 to 76 are implemented
+
+[33mcommit 0e64c2990366396355e518adc418978400b59761[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Wed Oct 21 12:21:41 2026 -0300
+
+    Implemented Task 71’s on-demand AI project summary in the dashboard. The backend sends the existing validated project and risk context to OpenAI; the UI shows the result, loading state, and configuration/provider errors. The API key stays on the backend.
+
+[33mcommit a6d435ebdd94524b4fc633aad26a420f08732304[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Wed Oct 21 12:10:39 2026 -0300
+
+    Tasks 66 to 70 are implemented in the backend. The following changes have been made:
+
+[33mcommit f488bf40db191dbf9f9f292429599562d1d7f245[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Wed Oct 21 11:16:44 2026 -0300
+
+    Tasks 61 to 65 are implemented in this commit. The following files have been added or modified to support the new project health assessment feature:
+
+[33mcommit e2aee34ffb9169f5261976161ac92859c6f394d6[m
+Merge: cc30d5b ee2ce29
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Tue Oct 20 18:05:05 2026 -0300
+
+    Merge origin/main and retain task risk indicators
+
+[33mcommit cc30d5bf0241914e67f3f83c99ee9a81367e97e0[m
+Author: William Oliveira <wioliveira@gmail.com>
+Date:   Tue Oct 20 17:56:42 2026 -0300
+
+    Tasks 55 a 60 are implemented. The following services have been added to the backend:
+
+[33mcommit ee2ce29bcdf6219432395c6b7b1bf4abf66e9659[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Tue Oct 20 15:23:34 2026 -0300
+
+    Feat/status 31 task dependencies (#126)
+    
+    * Implemented Task 32’s dashboard layout
+    
+    * Task 33,34,35,36,37,38,39 are implemented
+    
+    * Task 40,41,42 are implemented
+    
+    * Task 40,41,42 are implemented
+    
+    * Task 49 a 54 are implemented
+    
+    ---------
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit 0f9ace643b1626d2f14d388c2d2313f31dbdbe65[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Tue Oct 20 13:07:57 2026 -0300
+
+    Task 40 a 48 are implemented (#119)
+    
+    * Implemented Task 32’s dashboard layout
+    
+    * Task 33,34,35,36,37,38,39 are implemented
+    
+    * Task 40,41,42 are implemented
+    
+    * Task 40,41,42 are implemented
+    
+    ---------
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit 0a66a5f88ce4a1a5b1bad8ff9b03f3939d55cde3[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Mon Oct 19 15:37:08 2026 -0300
+
+    Feat/status 31 task dependencies (#107)
+    
+    * Implemented Task 32’s dashboard layout
+    
+    * Task 33,34,35,36,37,38,39 are implemented
+    
+    ---------
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit b4f7e6024d797c88dd06f894c28660363e583cd3[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Mon Oct 19 14:12:32 2026 -0300
+
+    Implemented Task 32’s dashboard layout (#106)
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit b8ae8b1eda5152418f137e6492f89107a65170af[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Mon Oct 19 11:19:51 2026 -0300
+
+    Add project and task overview (#97)
+    
+    Add API endpoints to retrieve sample project details and tasks. Display the project overview and task list, including task status, priority, owner, and due date, with loading, error, retry, and empty states.
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit 441c4329bae28cf9d0b7291727e9bab25d5d7f1e[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Mon Oct 19 11:17:55 2026 -0300
+
+    Add project and task overview (#96)
+    
+    Added API endpoints to retrieve sample project details and tasks. Displayed the project overview and task list, including task status, priority, owner, and due date, with loading, error, retry, and empty states.
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+
+[33mcommit 47bf7a66ebad7a4ba7f5afedb8575037fe4334e4[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Fri Oct 16 10:33:44 2026 -0300
+
+    Make sample project scenario coherent (#88)
+    
+    Updated the sample tasks with due dates that fit the project’s September–December 2026 schedule, and linked discovery, design, implementation, and validation work through prerequisites. The journey-mapping task remains overdue and in progress; completed and not-started work also matches the sequence.
+
+[33mcommit 7ceb41441725e4876927461015d879e64587ffbc[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Fri Oct 16 10:28:09 2026 -0300
+
+    Add varied statuses to sample tasks (#87)
+    
+    Added statuses to all eight sample tasks in data/sample-tasks.json: completed, in_progress, and not_started. The overdue task remains in progress, and the existing dependency is preserved.
+
+[33mcommit 1bb610a27aa9def14fb97277b18f8154f2d0546f[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Fri Oct 16 10:17:44 2026 -0300
+
+    Add sample task prerequisite relationship (#86)
+    
+    Added a dependency to data/sample-tasks.json: Design the accessible account overview depends on Define portal navigation and content structure, referenced by task ID in depends_on.
+
+[33mcommit fd740d130012a0601cb3a99e35ed8a576c8bf11a[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Fri Oct 16 10:11:50 2026 -0300
+
+    Add an overdue sample task (#85)
+    
+    Include at least one incomplete task whose due date is in the past, so overdue indicators and handling can be developed and tested.
+    
+    Parent story: #9
+    Epic: #3
+
+[33mcommit ea0d78df8004af68d7546c6eca3edafe13ff51bb[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Fri Oct 16 10:01:08 2026 -0300
+
+    Add varied priorities to sample tasks (#84)
+    
+    Assigned priorities have no conflict and are approved
+
+[33mcommit d209de8287b0c9859e29fe128e7e8f0ffea374fe[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Tue Oct 13 19:11:28 2026 -0300
+
+    Add realistic sample tasks for demo project (#83)
+    
+    Each one of eight realistic tasks for the Customer Portal Modernization project are clear, good title, description , Unique ID...
+    
+    So approved.
+
+[33mcommit be9f5d091eda789cc6c6dff9429464ef3121c342[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Tue Oct 13 18:54:50 2026 -0300
+
+    Add realistic sample project seed data (#82)
+    
+    This sample project data looks right
+
+[33mcommit d77c86a2cc10433ce00402e30d343c3510b100da[m
+Author: William Ramos de Oliveira <wioliveira.devops@outlook.com>
+Date:   Tue Oct 13 18:02:12 2026 -0300
+
+    Us03 task8 basic data structures (#74)
+    
+    * Us03 task10 basic coding standards (#71)
+    
+    * Defines the initial attributes for a task so
+    project data can be represented and analyzed consistently.
+    
+    * Adding tasking atributes.
+    
+    * Adding Task Statuses to "task-attributes.md" document
+    
+    * Defines the supported task priority levels and
+    their ordering so tasks can be compared consistently.
+    
+    ---------
+    
+    Co-authored-by: William Oliveira <wioliveira@gmail.com>
+    
+    * Data model documentation for project and task management,
+    including task dependencies, owners, and due dates.
+  
