@@ -1,0 +1,14 @@
+.ai-generated-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.18rem 0.55rem;
+  color: var(--text-h, #1f1630);
+  background: var(--accent-bg, rgb(107 70 193 / 10%));
+  border: 1px solid var(--accent-border, rgb(107 70 193 / 45%));
+  border-inline-start: 3px solid var(--accent, #6b46c1);
+  border-radius: 999px;
+  font: 600 0.72rem/1.35 var(--sans, system-ui, sans-serif);
+  letter-spacing: 0.015em;
+  white-space: nowrap;
+}
